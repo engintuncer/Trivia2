@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Game</title>
+</head>
+<body>
+    <h1>Trivia Game</h1>
+    <form action="/get_questions" method="POST">
+        <label for="category">Select Category:</label>
+        <select name="category" id="category">
+            <option value="">Random</option>
+            {% for id, name in categories.items() %}
+                <option value="{{ id }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="difficulty">Difficulty:</label>
+        <select name="difficulty" id="difficulty">
+            <option value="">Random</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+
+        <label for="amount">Number of Questions:</label>
+        <input type="number" name="amount" min="1" max="50" value="5">
+
+        <button type="submit">Start Game</button>
+    </form>
+</body>
+</html>

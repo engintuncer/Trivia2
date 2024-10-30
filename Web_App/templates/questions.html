@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivia Game</title>
+</head>
+<body>
+    <h2>Question {{ current + 1 }} of {{ questions|length }}</h2>
+    <p>{{ questions[current]['question'] }}</p>
+
+    <form action="/check_answer" method="POST">
+        {% set options = questions[current]['incorrect_answers'] + [questions[current]['correct_answer']] %}
+        {% for option in options|shuffle %}
+            <input type="radio" name="answer" value="{{ option }}" required> {{ option }}<br>
+        {% endfor %}
+        <input type="hidden" name="questions" value="{{ questions }}">
+        <input type="hidden" name="current" value="{{ current }}">
+        <input type="hidden" name="score" value="{{ score }}">
+        <button type="submit">Submit Answer</button>
+    </form>
+</body>
+</html>
